@@ -76,13 +76,10 @@ def roots(y, x0, x1, var):
     if re.findall(r'\^\d*\.\d*', y) and x0 < 0: x0 = 0
     while step > 0.001 and len(solutions) < degree:
         for k in generator(x0, x1, step): 
-            i, j = round(k[0], k_size), round(k[1], k_size)
-            try:
-                if f(i) == 0: solutions.append(i)
-            except ZeroDivisionError: pass
-            try:
-                if f(j) == 0: solutions.append(j)
-            except ZeroDivisionError: pass
+            for i in range(2):
+                try:
+                    if f(round(k[i], k_size)) == 0: solutions.append(j)
+                except ZeroDivisionError: pass
         step, k_size = step/10, k_size + 1
     return solutions
 
