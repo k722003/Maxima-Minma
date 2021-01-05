@@ -70,22 +70,20 @@ def roots(y, x0, x1, var):
     Returns the roots of the function y(var)
     x0: Lower limit, x1: Upper limit
     """
-    parsed, solutions, Len = parse(y, var), [], 0
+    parsed, solutions, k_size = parse(y, var), [], 0
     f, step, degree = fnify(y, var), 1, abs(max([(i[1]) for i in parsed]))
     #Naive Solution
     if re.findall(r'\^\d*\.\d*', y) and x0 < 0: x0 = 0
     while step > 0.001 and len(solutions) < degree:
         for k in generator(x0, x1, step): 
-            i, j = round(k[0], Len), round(k[1], Len)
+            i, j = round(k[0], k_size), round(k[1], k_size)
             try:
-                if (i not in solutions) and f(i) == 0: 
-                    solutions.append(i)
+                if f(i) == 0: solutions.append(i)
             except ZeroDivisionError: pass
             try:
-                if (j not in solutions) and f(j) == 0: 
-                    solutions.append(j)
+                if f(j) == 0: solutions.append(j)
             except ZeroDivisionError: pass
-        step, Len = step/10, Len + 1
+        step, k_size = step/10, k_size + 1
     return solutions
 
 def signum_fn(x):
