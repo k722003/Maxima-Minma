@@ -11,3 +11,5 @@ It returns [(a, b, c)1, (a, b, c)2...] where
     b = Point of maxima/minima  
     c = SignumFunction(y2(b))  
 Supports polynomial equations of the form ax^n + .... + z  
+
+P.S: This was a school project
